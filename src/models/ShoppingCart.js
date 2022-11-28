@@ -1,9 +1,9 @@
-import { randomUUID } from 'crypto'
+import { randomUUID } from "crypto";
 export class ShoppingCart {
-    id 
-    products
-    constructor(products){
-        this.id = randomUUID()
-        this.products = products
-    }
+  id;
+  products;
+  constructor(products) {
+    this.id = randomUUID();
+    this.products = products;
+  }
 }
