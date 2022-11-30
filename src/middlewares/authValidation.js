@@ -1,8 +1,12 @@
+import { HANDLE_404_ERROR } from '../utilities/handleEstatus.js'
 export const authValidation = (admin = false) => {
   return (req, res, next) => {
+    console.log(req.host + req.originalUrl)
     if (!admin)
-      res.status(400).json({
-        resp: HANDLE_404_ERRORS,
+      return res.status(400).json({
+        status: HANDLE_404_ERROR,
+        message: 'No tiene permisis para entrar a esta ruta',
+        path: req.originalUrl
       });
 
     next();
