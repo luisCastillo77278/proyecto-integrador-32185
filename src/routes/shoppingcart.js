@@ -14,7 +14,6 @@ router.post("/", shoppingcart.create());
 router.post("/:id_cart/products", shoppingcart.createProduct());
 router.get("/:id_cart/products", shoppingcart.getById());
 router.delete("/:id_cart", shoppingcart.deleteById());
-
 router.delete("/:id_cart/products/:id_prod", shoppingcart.deleteByIdProduct());
 
 export default router;

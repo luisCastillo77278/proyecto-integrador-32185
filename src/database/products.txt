@@ -1,10 +1,1 @@
-[
-  {
-    "id": "a9dfb730-73c8-4792-b785-8e8484b9f6c2",
-    "name": "producto3"
-  },
-  {
-    "id": "c5b4c4fc-d5f8-48ba-8c6d-a8cf2b95a134",
-    "name": "producto3"
-  }
-]
+[]
