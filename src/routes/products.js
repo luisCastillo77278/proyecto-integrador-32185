@@ -10,7 +10,7 @@ const db = Conection.conectionDbFile("products");
 const product = new Container(ProductService, db, ProductCtrl).Controller;
 
 router.get("/", product.getAll());
-router.post("/", authValidation(), product.create());
+router.post("/", authValidation(true), product.create());
 router.get("/", product.getAll());
 router.get("/:id", product.getById());
 router.put("/:id", authValidation(), product.updateById());

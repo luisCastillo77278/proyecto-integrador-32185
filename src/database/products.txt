@@ -2,31 +2,8 @@
   {
     "id": "c9204ec3-41e5-4d8c-bdce-c7d7ebad6fea",
     "name": "zapatilla nike",
-    "description": 25
-  },
-  {
-    "id": "46d8f689-7039-428c-a01a-c9eb021a5763",
-    "name": "zapatilla nike",
-    "description": 25
-  },
-  {
-    "id": "5bab546a-b715-417c-8c67-cb0bb07ddea3",
-    "name": "zapatilla nike",
-    "description": 25
-  },
-  {
-    "id": "e2123808-472b-4226-88b4-25bc33dea11b",
-    "name": "zapatilla nike",
-    "description": 25
-  },
-  {
-    "id": "b10a6834-ca7d-47cf-81ed-b76262e5643b",
-    "name": "zapatilla nike",
-    "description": 25
-  },
-  {
-    "id": "b3c52b38-f1a1-4e23-9172-41f252c4bd28",
-    "name": "zapatilla nike",
-    "description": 25
+    "description": "zapatilla nike",
+    "image": "zapatilla-nike.png",
+    "price": 30.5
   }
 ]
