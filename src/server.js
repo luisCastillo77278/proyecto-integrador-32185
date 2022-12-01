@@ -28,6 +28,6 @@ export class Server {
   }
 
   listen() {
-    this.app.listen(3000, () => console.log("3000 corriendo"));
+    this.app.listen(8080, () => console.log("3000 corriendo"));
   }
 }
