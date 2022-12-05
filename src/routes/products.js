@@ -12,7 +12,7 @@ const product = new Container(ProductService, db, ProductCtrl).Controller;
 router.get("/", product.getAll());
 router.post("/", authValidation(true), product.create());
 router.get("/:id", product.getById());
-router.put("/:id", authValidation(true), product.updateById());
-router.delete("/:id", authValidation(true), product.deleteById());
+router.put("/:id", authValidation(), product.updateById());
+router.delete("/:id", authValidation(), product.deleteById());
 
 export default router;

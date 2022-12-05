@@ -26,19 +26,38 @@ export class ShoppingCartCtlr {
 
   createProduct() {
     return async (req, res) => {
-      const { id_cart } = req.params;
-      const { id_product } = req.body;
+      try {
+        const { id_cart } = req.params;
+        const { id_product } = req.body;
+  
+        const cart = await this.service.getById(id_cart);
+        if(!cart) 
+          throw {
+            status: HANDLE_404_ERROR,
+            message: `No se encontro el recurso con el valor ${id_cart}`
+          }
 
-      const productService = new ProductService(
-        Conection.conectionDbFile("products")
-      );
-
-      const product = await productService.getById(id_product);
-      const { products } = await this.service.getById(id_cart);
-
-      products.push(product);
-      const shoppingcart = await this.service.updateById(id_cart, { products });
-      res.json(shoppingcart);
+        const productService = new ProductService(
+          Conection.conectionDbFile("products")
+        );
+  
+        const product = await productService.getById(id_product);
+        if(!product) 
+          throw {
+            status: HANDLE_404_ERROR,
+            message: `No se encontro el recurso con el valor ${id_product}`
+          }
+  
+        const { products } = cart;
+        products.push(product);
+        const shoppingcart = await this.service.updateById(id_cart, { products });
+        return res.json(shoppingcart);
+      } catch (err) {
+        return res.status(err.status || HANDLE_500_ERROR).json({
+          status: err.status || HANDLE_500_ERROR,
+          message: err.message
+        })
+      }
     };
   }
 
@@ -46,12 +65,13 @@ export class ShoppingCartCtlr {
     return async (req, res) => {
       try {
         const { id_cart } = req.params;
-        const { products } = await this.service.getById(id_cart);
-        if (!products)
+        const cart = await this.service.getById(id_cart);
+        if (!cart)
           throw {
             status: HANDLE_404_ERROR,
-            message: `No se encontro el recurso con el valor ${id}`
+            message: `No se encontro el recurso con el valor ${id_cart}`
           }
+        const { products } = cart;
         return res.json(products);
       } catch (err) {
         return res.status(err.status || HANDLE_500_ERROR).json({
@@ -67,10 +87,10 @@ export class ShoppingCartCtlr {
       try {
         const { id_cart } = req.params;
         const products = await this.service.updateById(id_cart, { products: [] });
-        if (products)
+        if (!products)
           throw {
             status: HANDLE_404_ERROR,
-            message: `No se encontro el recurso con el valor ${id}`
+            message: `No se encontro el recurso con el valor ${id_cart}`
           }
         return res.json(products);
       } catch (err) {
@@ -86,13 +106,22 @@ export class ShoppingCartCtlr {
     return async (req, res) => {
       try {
         const { id_cart, id_prod } = req.params;
-        const { products } = await this.service.getById(id_cart);
+
+        const cart = await this.service.getById(id_cart);
+        if(!cart)
+          throw {
+            status: HANDLE_404_ERROR,
+            message: `No se encontro el recurso con el valor de ${id_cart}`
+          }
+        
+        const { products } = cart;
+
         const index = products.findIndex((product) => product.id === id_prod);
 
         if (index === -1)
           throw {
             status: HANDLE_404_ERROR,
-            message: `No se encontro el recurso con el valor ${id}`
+            message: `No se encontro el recurso con el valor ${id_prod}`
           }
 
         const product = products[index];
