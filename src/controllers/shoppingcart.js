@@ -101,7 +101,7 @@ export class ShoppingCartCtlr {
 
         return res.json(product);
       } catch (err) {
-        return res.json(err.status || HANDLE_500_ERROR).json({
+        return res.status(err.status || HANDLE_500_ERROR).json({
           status: err.status || HANDLE_500_ERROR,
           message: err.message
         })

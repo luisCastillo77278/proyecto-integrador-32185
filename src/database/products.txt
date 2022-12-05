@@ -1,9 +1,1 @@
-[
-  {
-    "id": "c9204ec3-41e5-4d8c-bdce-c7d7ebad6fea",
-    "name": "zapatilla nike",
-    "description": "zapatilla nike",
-    "image": "zapatilla-nike.png",
-    "price": 30.5
-  }
-]
+[]

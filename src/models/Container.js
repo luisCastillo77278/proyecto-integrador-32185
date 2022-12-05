@@ -28,6 +28,9 @@ export class Container {
     const elements = await this.getDB()
     const index = elements.findIndex(element => element.id === id)
 
+    if(index === -1)
+      return 
+
     const beforedElement = elements[index]
     elements[index] = { ...beforedElement, ...obj }
     await this.file.fileWrite(elements)
@@ -37,6 +40,9 @@ export class Container {
   async deleteById(id) {
     const elements = await this.getDB()
     const index = elements.findIndex(element => element.id === id)
+
+    if(index === -1)
+      return
 
     const element = elements[index]
     elements.splice(index, 1)
