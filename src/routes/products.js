@@ -1,13 +1,20 @@
 import { Router } from "express";
 import { ProductService } from "../services/products.js";
 import { ProductCtrl } from "../controllers/product.js";
-import { Conection } from "../utilities/conexion.js";
-import { Container } from "../utilities/container.js";
 import { authValidation } from '../middlewares/authValidation.js'
-const router = Router();
-const db = Conection.conectionDbFile("products");
 
-const product = new Container(ProductService, db, ProductCtrl).Controller;
+import { Container as Inyectable } from "../utilities/container.js";
+import { Contenedor } from '../models/Contenedor.js'
+
+import { CNX_STR } from '../enviroments/dev.enviroment.js'
+console.log(CNX_STR)
+
+const router = Router();
+
+const data = new Contenedor("FILE", "products")
+const db = data.getContainer()
+
+const product = new Inyectable(ProductService, db, ProductCtrl).Controller;
 
 router.get("/", product.getAll());
 router.post("/", authValidation(true), product.create());

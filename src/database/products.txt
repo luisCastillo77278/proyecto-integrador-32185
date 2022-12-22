@@ -1,6 +1,6 @@
 [
   {
     "id": "6e4da637-234f-4ea3-a59b-12eefb87cd05",
-    "name": "producto3"
+    "name": "producto4"
   }
 ]

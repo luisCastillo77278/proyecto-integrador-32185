@@ -30,6 +30,7 @@ export class ProductCtrl {
     return async (_req, res) => {
       try {
         const products = await this.service.getAll();
+        console.log(products)
         return res.status(200).json(products);
       } catch (err) {
         return res.status(HANDLE_500_ERROR).json({

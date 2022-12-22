@@ -1,4 +1,4 @@
-export class Container {
+export class FileContainer {
 
   constructor(db) {
     this.file = db
