@@ -1,11 +1,17 @@
+import { database } from "../data/database.js";
+import { enviroment } from "../enviroments/env.js";
+import { Container } from "../models/Container.js";
 import { ShoppingCart } from "../models/ShoppingCart.js";
 import { ProductService } from "../services/products.js";
-import { Conection } from "../utilities/conexion.js";
 import { HANDLE_404_ERROR, HANDLE_500_ERROR } from "../utilities/handleEstatus.js";
+
 
 export class ShoppingCartCtlr {
   constructor(service) {
     this.service = service;
+    this.container = new Container()
+    this.container.collection = "products"
+    this.container.connection = database[enviroment.persistence]
   }
 
   create() {
@@ -38,8 +44,10 @@ export class ShoppingCartCtlr {
           }
 
         const productService = new ProductService(
-          Conection.conectionDbFile("products")
-        );
+          await this.container.getContainer(
+            enviroment.persistence
+          )
+        )
   
         const product = await productService.getById(id_product);
         if(!product) 

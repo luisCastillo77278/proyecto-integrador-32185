@@ -6,7 +6,7 @@ export class MongoContainer {
   }
 
   async save(data) {
-    const { insertedId } =  await this.collection.insertOne(data)
+    const { insertedId } =  await this.#collection.insertOne(data)
     return await this.#collection.findOne({_id: insertedId }, { projection: {_id: 0}})  
   }
 
