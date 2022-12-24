@@ -3,23 +3,28 @@ import { ProductService } from "../services/products.js";
 import { ProductCtrl } from "../controllers/product.js";
 import { authValidation } from '../middlewares/authValidation.js'
 
-import { Container as Inyectable } from "../utilities/container.js";
-import { Contenedor } from '../models/Contenedor.js'
-
-import { CNX_STR } from '../enviroments/dev.enviroment.js'
-console.log(CNX_STR)
+import { enviroment } from '../enviroments/env.js'
+import { database } from "../data/database.js";
+import { Container } from "../models/Container.js";
 
 const router = Router();
 
-const data = new Contenedor("FILE", "products")
-const db = data.getContainer()
+const container = new Container()
+container.collection = "products"
+container.connection = database[enviroment.persistence];
 
-const product = new Inyectable(ProductService, db, ProductCtrl).Controller;
+const product = new ProductCtrl( 
+  new ProductService(
+    await container.getContainer(
+      enviroment.persistence
+    )
+  )
+)
 
 router.get("/", product.getAll());
 router.post("/", authValidation(true), product.create());
 router.get("/:id", product.getById());
-router.put("/:id", authValidation(), product.updateById());
-router.delete("/:id", authValidation(), product.deleteById());
+router.put("/:id", authValidation(true), product.updateById());
+router.delete("/:id", authValidation(true), product.deleteById());
 
 export default router;

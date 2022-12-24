@@ -1,12 +1,7 @@
-/**
- * estbamos extendiendo a container de file
- * chechar esta parte
- */
+import { Service } from "./service.js";
 
-//todo crear una propiedad container
-//todod crear un constructor que se le pasae el contenedor
-//todo asignarselo a la propiedad
-export class ShoppingCartService  {
-  constructor() {
+export class ShoppingCartService extends Service {
+  constructor(container) {
+    super(container)
   }
 }

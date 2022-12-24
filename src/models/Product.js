@@ -6,7 +6,7 @@ export class Product {
   image;
   price;
 
-  constructor(name, description, image, price) {
+  constructor(name, price, image, description) {
     this.id = randomUUID();
     this.name = name;
     this.description = description;
