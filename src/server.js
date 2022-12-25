@@ -1,10 +1,15 @@
 import express from "express";
+import { FirebaseInit } from "./config/firebase.js";
+import { enviroment } from "./enviroments/env.js";
 import { Routing } from "./routes/index.js";
 import { HANDLE_404_ERROR } from "./utilities/handleEstatus.js";
 
 export class Server {
   constructor() {
     this.app = express();
+
+    if(enviroment.persistence === "firebase") this.#initFirebase()
+    
     this.middlewares();
     this.routing();
   }
@@ -19,6 +24,10 @@ export class Server {
         message: "No se econtro ruta con esa caracteristica",
       });
     });
+  }
+
+  async #initFirebase(){
+    await FirebaseInit()
   }
 
   middlewares() {

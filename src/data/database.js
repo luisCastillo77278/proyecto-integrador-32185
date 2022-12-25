@@ -1,4 +1,5 @@
 import { FileConnection } from "../config/file.js"
+import { FirebaseConnection } from "../config/firebase.js"
 import { MongoConnection } from "../config/mongo.js"
 
 export const database = {
@@ -8,5 +9,7 @@ export const database = {
   file: async(name) =>{
     return FileConnection(name)
   },
-  firebase: () => {}
+  firebase: async() => {
+    return await FirebaseConnection() 
+  }
 }
